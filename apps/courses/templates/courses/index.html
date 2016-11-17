@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+      <meta charset="UTF-8">
+      <title>Add a student to all bootcamp courses</title>
+      {% load staticfiles %}
+      <link rel="stylesheet" href="{% static 'courses/css/courses.css' %}"media="screen" title="no title"  charset="utf-8">
+
+  </head>
+  <body>
+    <h1 id="title-text">CODING DOJO COURSES</h1>
+    <div id="main-container">
+      <h3 id="header-text">Add a new course</h3>
+      <form action="/add_course" method='post'>
+        {% csrf_token %}
+         {% if messages %}
+          <ul class="validation-error">
+          {% for message in messages %}
+           <li{% if message.tags %} 
+              class="{{ message.tags }}"
+              {% endif %} id="bad-validation">
+            {{ message }}</li>
+          {% endfor %}
+          </ul>
+        {% endif %}
+        <label class="form-label">
+          Name: <input id="name-text" type="text" name="course_name" placeholder="enter course name">
+        </label>
+        <label class="form-label">
+          Description: <textarea id="description-text" type="text" name="description" placeholder="enter a short course's description"></textarea>
+        </label>
+        <input id="submit-button" type="submit" value="Add">
+      </form>
+
+       <h3 id="header-text">Courses</h3>
+      <table id="courses-table">
+        <thead>
+          <tr>
+            <th class="table-heading">Course Name</th>
+            <th class="table-heading">Description</th>
+            <th class="table-heading">Date Added</th>
+            <th class="table-heading">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+        {% for course in course_listing %}
+          <tr>
+            <td class="table-data">{{ course.name }}</td>
+            <td class="table-data">{{ course.description.name }}</td>
+            <td class="table-data">{{ course.created_at }}</td>
+            <td class="table-data"><a id="remove" href="/remove_confirm/{{ course.description.id }}">Remove</a></td>
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+
+      
+    </div>
+
+
+	</body>
+</html>

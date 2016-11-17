@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+      <meta charset="UTF-8">
+      <title>Deleting a Course</title>
+      {% load staticfiles %}
+      <link rel="stylesheet" href="{% static 'courses/css/courses.css' %}"media="screen">
+
+  </head>
+  <body>
+    <h1 id="header-text">Are you sure you want to delete the following course?</h1>
+    <div id="result-container">
+      <h3 id="div-header2">Selected Course to Delete:</h3>
+
+      <table id="movies-table">
+        <thead>
+          <tr>
+            <th class="table-heading">Name</th>
+            <th class="table-heading">Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="table-data">{{ del_course.name }}</td>
+            <td class="table-data">{{ del_course.description.name }}</td>
+          </tr>
+        </tbody>
+      </table>
+
+
+      <form id="goback-form" action="/" method='get'>
+            <input id="no-button" type="submit" value="NO">
+      </form>
+
+      <form id="delete-form" action="/remove_course/{{ del_course.description.id }}">
+        <input id="submit-delete" type="submit" value="DELETE">
+      </form>
+
+      
+    </div>
+
+
+	</body>
+</html>
